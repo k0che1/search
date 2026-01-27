@@ -1,0 +1,70 @@
+Блок 1: Теория вероятности и логика
+Задание 1: Фермер
+Ответ:3.99
+Задание 2: Кулинарное соревнование
+Ответ:26.8
+Задание 3: Одинокая дорога
+Ответ: 63.2;93.3
+
+Блок 2: Python 
+Задание 1: Изоморфизмы
+
+def is_isomorphic(s, t):
+    if len(s) != len(t):
+        return False
+
+    char_map = {}
+    used_chars = set()
+
+    for i in range(len(s)):
+        if s[i] in char_map:
+            if char_map[s[i]] != t[i]:
+                return False
+        else:
+            char_map[s[i]] = t[i]
+            used_chars.add(t[i])
+
+    return len(used_chars) == len(set(t))
+
+Время: O(n).
+
+Задание 2: Натуральная последовательность
+def missing_number(nums):
+    sum_id=sum([int(i) for i in range(nums[-1]+1)])
+    return sum_id-sum(nums)
+
+Время: O(n).
+Память: O(1).
+
+Задание 3: Факторизация
+
+def prime_factors(n):
+    f = []
+    for i in range(2, n + 1):
+         if n<i:
+              break
+         while n % i == 0:
+                f.append(i)
+                n //= i
+    return f
+Время: O(sqrt(n)) в худшем случае. 
+Память: O(k) — количество множителей.
+
+Блок 3: SQL 
+Задание 1: Абитуриенты
+SELECT id, scores, RANK() OVER (ORDER BY scores DESC) AS position 
+FROM examination
+
+Задание 2: FULL JOIN
+Минимально 30 строк, максимально 50 строк.
+
+Задание 3: Покупки
+
+Select a.client_id
+From account a
+inner join transaction t using(account_id)
+Where t.transaction_date> CURRENT_DATE - INTERVAL '30’ day
+And t.type=’buy’
+Group by a.client_id
+HAVING SUM(t.amount) < 5000;
+
